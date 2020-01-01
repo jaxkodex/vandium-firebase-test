@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: The deployment template for the test software
+Parameters:
+  FIREBASE_CREDENTIALS:
+    Type: String
+  FIREBASE_DATABASE:
+    Type: String
+Resources:
+  TheFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: testme-service
+      Handler: index_vandium.handler
+      Runtime: nodejs12.x
+      CodeUri: .
+      Timeout: 3
+      Environment:
+        Variables:
+          FIREBASE_CREDENTIALS: !Ref FIREBASE_CREDENTIALS
+          FIREBASE_DATABASE: !Ref FIREBASE_DATABASE
